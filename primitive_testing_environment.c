@@ -47,9 +47,22 @@ void testRetrievingTestName(){
 	primititiveAssertTrue(!strcmp("This is my name.",testName(test)));
 }
 
+
+void multipleAssertionTestWithSecondFailing(Assert *assert){
+	assertTrue(assert,5 == 4);
+	assertTrue(assert,5 == 5);
+}
+
+void testThatTestTakesAllAsssertionsIntoConsideration(){
+	CUTest *test = CUTest_create("Testo.",multipleAssertionTestWithSecondFailing);
+	CUTest_execute(test);
+	primititiveAssertTrue(!didTestPass(test));
+}
+
 int main(){
 	runPrimitiveTest("Check if test passes for always true test.",testThatAnAlwaysTrueTest);
 	runPrimitiveTest("Check if test fails for always false test.",testThatAnAlwaysFalseTest);
 	runPrimitiveTest("Test that test return its name.",testRetrievingTestName);
+	runPrimitiveTest("Test that test takes all asssertions into consideration.",testThatTestTakesAllAsssertionsIntoConsideration);
 	return 0;
 }

@@ -1,12 +1,5 @@
 #include <stdlib.h>
-
-typedef struct Assert {
-	int result;
-}Assert;
-
-void assertTrue(Assert *assert,int boolean){
-	assert->result = boolean;
-}
+#include "cutest_assert.h"
 
 typedef struct CUTest {
 	void (*testFunction)(Assert *assert);
@@ -16,9 +9,9 @@ typedef struct CUTest {
 
 CUTest *CUTest_create(char *name,void (*testFunction)(Assert *assert)){
 	CUTest *test = (CUTest*)malloc(sizeof(CUTest));
-	test->testFunction = testFunction;
 	test->name = name;
-	test->assert = (Assert*)malloc(sizeof(Assert));
+	test->testFunction = testFunction;
+	test->assert = Assert_create();
 }
 
 char *testName(CUTest *test){
@@ -26,8 +19,9 @@ char *testName(CUTest *test){
 }
 
 void CUTest_execute(CUTest *test){
-	test->testFunction(test->assert);	
+	test->testFunction(test->assert);
 }
+
 int didTestPass(CUTest *test){
-	return test->assert->result;
+	return Assert_result(test->assert);
 }

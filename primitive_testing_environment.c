@@ -38,7 +38,8 @@ void testThatAnAlwaysFalseTest(){
 	primititiveAssertTrue(!didTestPass(test));
 }
 
-void main(){
+int main(){
 	runPrimitiveTest("Check if test passes for always true test.",testThatAnAlwaysTrueTest);
 	runPrimitiveTest("Check if test fails for always false test.",testThatAnAlwaysFalseTest);
+	return 0;
 }

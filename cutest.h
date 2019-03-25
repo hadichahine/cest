@@ -4,6 +4,7 @@
 
 typedef struct CUTest CUTest;
 CUTest *CUTest_create(char *name,void (*testFunction)(Assert *assert));
+char* testName(CUTest *test);
 void CUTest_execute(CUTest *test);
 int didTestPass(CUTest *test);
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "cutest.h"
 #include "cutest_assert.h"
 
@@ -38,8 +39,17 @@ void testThatAnAlwaysFalseTest(){
 	primititiveAssertTrue(!didTestPass(test));
 }
 
+
+void dummyTest(Assert *assert){}
+
+void testRetrievingTestName(){
+	CUTest *test = CUTest_create("This is my name.",dummyTest);
+	primititiveAssertTrue(!strcmp("This is my name.",testName(test)));
+}
+
 int main(){
 	runPrimitiveTest("Check if test passes for always true test.",testThatAnAlwaysTrueTest);
 	runPrimitiveTest("Check if test fails for always false test.",testThatAnAlwaysFalseTest);
+	runPrimitiveTest("Test that test return its name.",testRetrievingTestName);
 	return 0;
 }

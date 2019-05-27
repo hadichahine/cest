@@ -28,7 +28,7 @@ void testThatIsAlwaysTrue(Assert *assert){
 void testThatAnAlwaysTrueTest(){
 	CUTest *test = CUTest_create("Testo Trutouto",testThatIsAlwaysTrue);
 	CUTest_execute(test);
-	primititiveAssertTrue(didTestPass(test));
+	primititiveAssertTrue(CUTest_didTestPass(test));
 }
 
 void testThatIsAlwaysFalse(Assert *assert){
@@ -38,7 +38,7 @@ void testThatIsAlwaysFalse(Assert *assert){
 void testThatAnAlwaysFalseTest(){
 	CUTest *test = CUTest_create("Testo Failouto",testThatIsAlwaysFalse);
 	CUTest_execute(test);
-	primititiveAssertTrue(!didTestPass(test));
+	primititiveAssertTrue(!CUTest_didTestPass(test));
 }
 
 
@@ -46,7 +46,7 @@ void dummyTest(Assert *assert){}
 
 void testRetrievingTestName(){
 	CUTest *test = CUTest_create("This is my name.",dummyTest);
-	primititiveAssertTrue(!strcmp("This is my name.",testName(test)));
+	primititiveAssertTrue(!strcmp("This is my name.",CUTest_testName(test)));
 }
 
 void multipleAssertionTestWithSecondFailing(Assert *assert){
@@ -57,7 +57,7 @@ void multipleAssertionTestWithSecondFailing(Assert *assert){
 void testThatTestTakesAllAsssertionsIntoConsideration(){
 	CUTest *test = CUTest_create("Testo.",multipleAssertionTestWithSecondFailing);
 	CUTest_execute(test);
-	primititiveAssertTrue(!didTestPass(test));
+	primititiveAssertTrue(!CUTest_didTestPass(test));
 }
 
 int main(){

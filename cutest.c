@@ -14,7 +14,7 @@ CUTest *CUTest_create(char *name,void (*testFunction)(Assert *assert)){
 	test->assert = Assert_create();
 }
 
-char *testName(CUTest *test){
+char *CUTest_testName(CUTest *test){
 	return test->name;
 }
 
@@ -22,6 +22,6 @@ void CUTest_execute(CUTest *test){
 	test->testFunction(test->assert);
 }
 
-int didTestPass(CUTest *test){
+int CUTest_didTestPass(CUTest *test){
 	return Assert_result(test->assert);
 }

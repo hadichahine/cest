@@ -2,7 +2,7 @@
 
 typedef struct Assert Assert;
 Assert *Assert_create();
-void assertTrue(Assert *assert,int boolean);
+void Assert_assertTrue(Assert *assert,int boolean);
 int Assert_result(Assert *assert);
 
 #define CUTEST_ASSERT_Header

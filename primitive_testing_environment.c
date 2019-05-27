@@ -22,7 +22,7 @@ void primititiveAssertTrue(int statement){
 }
 
 void testThatIsAlwaysTrue(Assert *assert){
-	assertTrue(assert,5 == 5);
+	Assert_assertTrue(assert,5 == 5);
 }
 
 void testThatAnAlwaysTrueTest(){
@@ -32,7 +32,7 @@ void testThatAnAlwaysTrueTest(){
 }
 
 void testThatIsAlwaysFalse(Assert *assert){
-	assertTrue(assert,1 == 2);
+	Assert_assertTrue(assert,1 == 2);
 }
 
 void testThatAnAlwaysFalseTest(){
@@ -50,8 +50,8 @@ void testRetrievingTestName(){
 }
 
 void multipleAssertionTestWithSecondFailing(Assert *assert){
-	assertTrue(assert,5 == 4);
-	assertTrue(assert,5 == 5);
+	Assert_assertTrue(assert,5 == 4);
+	Assert_assertTrue(assert,5 == 5);
 }
 
 void testThatTestTakesAllAsssertionsIntoConsideration(){

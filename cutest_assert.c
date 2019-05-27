@@ -10,7 +10,7 @@ Assert *Assert_create(){
 	return assert;
 }
 
-void assertTrue(Assert *assert,int boolean){
+void Assert_assertTrue(Assert *assert,int boolean){
 	assert->result = assert->result && boolean;
 }
 

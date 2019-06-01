@@ -1,7 +1,7 @@
 #include <string.h>
 #include "cutest.h"
 #include "cutest_assert.h"
-#include "primitive_testing_environment.h"
+#include "../primitive_testing_environment.h"
 
 void testThatIsAlwaysTrue(Assert *assert){
 	Assert_assertTrue(assert,5 == 5);

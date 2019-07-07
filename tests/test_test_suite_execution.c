@@ -7,6 +7,7 @@ void testNothing(){
 
 }
 
-void main(){
+int main(){
     runPrimitiveTest("testNothing",testNothing);
+    return 0;
 }

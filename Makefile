@@ -2,8 +2,8 @@ tests := test_single_test_execution \
 		 test_test_suite_execution
 
 define template
-build/$(1): tests/$(1).c primitive_testing_enviroment.c src/*.c ./headers/*
-	gcc tests/$(1).c primitive_testing_enviroment.c src/*.c -I./headers -o build/$(1)
+build/$(1): tests/$(1).c primitive_testing/primitive_testing_enviroment.c src/*.c ./headers/* ./primitive_testing/*
+	gcc tests/$(1).c primitive_testing/primitive_testing_enviroment.c src/*.c -I./headers -I./primitive_testing -o build/$(1)
 endef
 
 #Initialize each test binary's build rule.

@@ -42,7 +42,9 @@ void testReachedEnd(){
 void testResetIterator(){
 	LinkedList *linkedList = createLinkedList();
 	int x = 4;
+	int y = 3;
 	addItemToLinkedList(linkedList,&x);
+	addItemToLinkedList(linkedList,&y);
 	primitiveAssertTrue(x == *((int*) next(linkedList)));
 	reset(linkedList);
 	primitiveAssertTrue(x == *((int*) next(linkedList)));

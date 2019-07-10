@@ -2,6 +2,8 @@
 #include "cutest_assert.h"
 #include "cutestsuite.h"
 #include "primitive_testing_environment.h"
+#include <string.h>
+
 #define TRUE 1
 #define FALSE 0
 
@@ -52,11 +54,17 @@ void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedi
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
 
+void testAccessingTestSuiteName(){
+    CUTestSuite *testSuite = CUTestSuite_create("testo");
+    primitiveAssertTrue(!strcmp("testo",CUTestSuite_name(testSuite)));
+}
+
 int main(){
     runPrimitiveTest("testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt",testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt);
     runPrimitiveTest("testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt",testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt);
     runPrimitiveTest("testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt);
     runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt);    
-    runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt);    
+    runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt);
+    runPrimitiveTest("testAccessingTestSuiteName",testAccessingTestSuiteName);
     return 0;
 }

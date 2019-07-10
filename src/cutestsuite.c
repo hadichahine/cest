@@ -3,13 +3,19 @@
 #include <stdlib.h>
 
 typedef struct {
+    char *name;
     LinkedList *testsList;
 } CUTestSuite;
 
 CUTestSuite *CUTestSuite_create(char *name){
     CUTestSuite *testSuite = (CUTestSuite*)malloc(sizeof(CUTestSuite));
+    testSuite->name = name;
     testSuite->testsList = createLinkedList();
     return testSuite;
+}
+
+char *CUTestSuite_name(CUTestSuite *testSuite){
+    return testSuite->name;
 }
 
 void CUTestSuite_addTest(CUTestSuite *testSuite,CUTest *test){

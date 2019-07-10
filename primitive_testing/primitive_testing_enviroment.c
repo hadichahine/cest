@@ -14,6 +14,6 @@ void runPrimitiveTest(char* testName,void (*testFunction)()){
 	printf("\n");
 }
 
-void primititiveAssertTrue(int statement){
+void primitiveAssertTrue(int statement){
 	testResult = testResult && statement;
 }

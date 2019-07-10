@@ -1,5 +1,6 @@
 tests := test_single_test_execution \
-		 test_test_suite_execution
+		 test_test_suite_execution \
+		 test_linked_list
 
 build:
 	mkdir build

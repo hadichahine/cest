@@ -12,6 +12,7 @@ CUTest *CUTest_create(char *name,void (*testFunction)(Assert *assert)){
 	test->name = name;
 	test->testFunction = testFunction;
 	test->assert = Assert_create();
+	return test;
 }
 
 char *CUTest_testName(CUTest *test){

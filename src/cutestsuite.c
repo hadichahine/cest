@@ -10,6 +10,7 @@ CUTestSuite *CUTestSuite_create(char *name){
     CUTestSuite *testSuite = (CUTestSuite*)malloc(sizeof(CUTestSuite));
     testSuite->test = NULL;
     testSuite->secondTest = NULL;
+    return testSuite;
 }
 
 void CUTestSuite_addTest(CUTestSuite *testSuite,CUTest *test){

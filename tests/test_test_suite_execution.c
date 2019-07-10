@@ -27,8 +27,26 @@ void testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt(){
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
 
+void testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt(){
+    CUTestSuite *testSuite = CUTestSuite_create("Failing Test Suite");
+    CUTestSuite_addTest(testSuite,CUTest_create("failing",failingTest));
+    CUTestSuite_addTest(testSuite,CUTest_create("passing test",passingTest));
+    CUTestSuite_execute(testSuite);
+    primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+}
+
+void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt(){
+    CUTestSuite *testSuite = CUTestSuite_create("Failing Test Suite");
+    CUTestSuite_addTest(testSuite,CUTest_create("passing test",passingTest));
+    CUTestSuite_addTest(testSuite,CUTest_create("failing test",failingTest));
+    CUTestSuite_execute(testSuite);
+    primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+}
+
 int main(){
     runPrimitiveTest("testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt",testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt);
     runPrimitiveTest("testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt",testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt);
+    runPrimitiveTest("testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt);
+    runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt);    
     return 0;
 }

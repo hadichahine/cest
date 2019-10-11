@@ -1,5 +1,6 @@
 #include "primitive_testing_environment.h"
 #include "linkedlist.h"
+#include <stdarg.h>
 
 void testThatProcessLinkedListHasItem3WhenAdded(){
 	LinkedList *linkedList = createLinkedList();
@@ -51,15 +52,15 @@ void testResetIterator(){
 }
 
 int main(){
+	return !(
     runPrimitiveTest("testThatProcessLinkedListHasItem3WhenAdded",
-		testThatProcessLinkedListHasItem3WhenAdded);
+		testThatProcessLinkedListHasItem3WhenAdded) &&
 	runPrimitiveTest("testThatProcessLinkedListHasItem3And4WhenAdded",
-		testThatProcessLinkedListHasItem3And4WhenAdded);	
+		testThatProcessLinkedListHasItem3And4WhenAdded) &&
 	runPrimitiveTest("testThatProcessLinkedListHasItem3And4And5WhenAdded",
-		testThatProcessLinkedListHasItem3And4And5WhenAdded);	
+		testThatProcessLinkedListHasItem3And4And5WhenAdded) &&
 	runPrimitiveTest("testReachedEnd",
-		testReachedEnd);
+		testReachedEnd) &&
 	runPrimitiveTest("testResetIterator",
-		testResetIterator);	
-    return 0;
+		testResetIterator));
 }

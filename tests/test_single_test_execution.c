@@ -43,9 +43,14 @@ void testThatTestTakesAllAsssertionsIntoConsideration(){
 }
 
 int main(){
-	runPrimitiveTest("Check if test passes for always true test.",testThatAnAlwaysTrueTest);
-	runPrimitiveTest("Check if test fails for always false test.",testThatAnAlwaysFalseTest);
-	runPrimitiveTest("Test that test return its name.",testRetrievingTestName);
-	runPrimitiveTest("Test that test takes all asssertions into consideration.",testThatTestTakesAllAsssertionsIntoConsideration);
+	return !(
+	runPrimitiveTest("Check if test passes for always true test.",
+		testThatAnAlwaysTrueTest) &&
+	runPrimitiveTest("Check if test fails for always false test.",
+		testThatAnAlwaysFalseTest) &&
+	runPrimitiveTest("Test that test return its name.",
+		testRetrievingTestName) &&
+	runPrimitiveTest("Test that test takes all asssertions into consideration.",
+		testThatTestTakesAllAsssertionsIntoConsideration));
 	return 0;
 }

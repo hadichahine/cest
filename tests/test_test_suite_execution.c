@@ -60,11 +60,18 @@ void testAccessingTestSuiteName(){
 }
 
 int main(){
-    runPrimitiveTest("testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt",testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt);
-    runPrimitiveTest("testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt",testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt);
-    runPrimitiveTest("testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt);
-    runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt);    
-    runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt",testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt);
-    runPrimitiveTest("testAccessingTestSuiteName",testAccessingTestSuiteName);
+	return !(
+    runPrimitiveTest("testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt",
+		testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt) &&
+	runPrimitiveTest("testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt",
+		testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt) &&
+	runPrimitiveTest("testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt",
+		testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt) &&
+	runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt",
+		testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt) &&
+	runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt",
+		testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt) &&
+	runPrimitiveTest("testAccessingTestSuiteName",
+		testAccessingTestSuiteName));
     return 0;
 }

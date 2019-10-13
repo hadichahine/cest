@@ -22,7 +22,7 @@ build/:
 
 build: build/ $(patsubst %,build/%,$(tests))
 
-test: build
+check: build
 	run-parts --report build
 
 clean:

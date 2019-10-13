@@ -1,4 +1,4 @@
 compiler:
   - gcc
 language: c
-script: make test
+script: make check

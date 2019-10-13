@@ -1,29 +1,12 @@
-tests := test_single_test_execution \
-	 test_test_suite_execution \
-	 test_linked_list
-
-define template
-build/$(1): tests/$(1).c primitive_testing/primitive_testing_enviroment.c src/*.c ./headers/* ./primitive_testing/*
-	gcc -std=gnu99 tests/$(1).c primitive_testing/primitive_testing_enviroment.c src/*.c -I./headers -I./primitive_testing -o build/$(1)
-endef
-
-#Initialize each test binary's build rule.
-$(foreach test,$(tests), \
-	$(eval $(call template,$(test))) \
-)
-
-#Construct build files names
-$(foreach test_name,$(tests), \
-	$(eval buildexecutioncommand += build/$(test_name)) \
-)
-
-build/:
-	mkdir build
-
-build: build/ $(patsubst %,build/%,$(tests))
+build: build/test_single_test_execution build/test_test_suite_execution build/test_linked_list
 
 check: build
 	run-parts --report build
+
+build/%: tests/%.c primitive_testing/primitive_testing_enviroment.c src/*.c ./headers/* ./primitive_testing/*
+	mkdir -p build
+	gcc -std=gnu99 $< primitive_testing/primitive_testing_enviroment.c src/*.c -I./headers -I./primitive_testing -o $@
+
 
 clean:
 	rm build -R

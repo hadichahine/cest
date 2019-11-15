@@ -31,15 +31,16 @@ nextpatch=$(call major).$(call minor).$(call add, $(call patch), $(INCREMENT))
 
 release-major: check
 	printf $(call nextmajor) > version
-	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(call nextmajor)-$(NAME).tar.gz
 
 release-minor: check
 	printf $(call nextminor) > version
-	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(call nextminor)-$(NAME).tar.gz
 
 release-patch: check
 	printf $(call nextpatch) > version
-	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(call nextpatch)-$(NAME).tar.gz
+
+archive: check
+	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(CURRENT_VERSION)-$(NAME).tar.gz
+
 
 $(DIST_DIR)/lib/$(LIBNAME).so: $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(wildcard $(SRC_DIR)/*.c))
 	mkdir -p $(DIST_DIR)/lib

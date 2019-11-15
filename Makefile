@@ -17,6 +17,30 @@ install: all
 clean:
 	rm $(BUILD_DIR) -R
 
+INCREMENT := 1
+NAME := unspecified
+CURRENT_VERSION := $(shell cat version)
+
+add=$(shell echo $$(( $(1) + $(2) )))
+major=$(shell printf $(CURRENT_VERSION) | cut - --delimiter="." -f1)
+minor=$(shell printf $(CURRENT_VERSION) | cut - --delimiter="." -f2)
+patch=$(shell printf $(CURRENT_VERSION) | cut - --delimiter="." -f3)
+nextmajor=$(call add, $(call major), $(INCREMENT)).$(call minor).$(call patch)
+nextminor=$(call major).$(call add, $(call minor), $(INCREMENT)).$(call patch)
+nextpatch=$(call major).$(call minor).$(call add, $(call patch), $(INCREMENT))
+
+release-major: check
+	printf $(call nextmajor) > version
+	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(call nextmajor)-$(NAME).tar.gz
+
+release-minor: check
+	printf $(call nextminor) > version
+	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(call nextminor)-$(NAME).tar.gz
+
+release-patch: check
+	printf $(call nextpatch) > version
+	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(call nextpatch)-$(NAME).tar.gz
+
 $(DIST_DIR)/lib/$(LIBNAME).so: $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(wildcard $(SRC_DIR)/*.c))
 	mkdir -p $(DIST_DIR)/lib
 	$(CC) -s -shared $(OBJ_DIR)/*.o -o $(DIST_DIR)/lib/$(LIBNAME).so

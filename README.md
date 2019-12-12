@@ -21,7 +21,7 @@ user@machine$ make install INSTALL_DIR=/usr/
 
 All executed make tasks should complete successfully. 
 
-## Compilation
+## Test Compilation
 - Compile against libcest.so.
 ```
 user@machine$ gcc test.c -lcest -o CestSampleTest

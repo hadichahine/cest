@@ -61,17 +61,17 @@ void testAccessingTestSuiteName(){
 
 int main(){
 	return !(
-    runPrimitiveTest("testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt",
+    runPrimitiveTest("Test that test suite passes when only a passing test is added to it.",
 		testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt) &&
-	runPrimitiveTest("testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt",
+	runPrimitiveTest("Test that test suite fails when only a failing test is added to it.",
 		testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt) &&
-	runPrimitiveTest("testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt",
+	runPrimitiveTest("Test that test suite fails when first a failing test then a passing test are added to it.",
 		testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt) &&
-	runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt",
+	runPrimitiveTest("Test that test suite fails when first a passing test then a failing test are added to it.",
 		testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt) &&
-	runPrimitiveTest("testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt",
+	runPrimitiveTest("Test that test suite fails when first a passing test then a failing test then a passing test are added to it.",
 		testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt) &&
-	runPrimitiveTest("testAccessingTestSuiteName",
+	runPrimitiveTest("Test accessing test suite name.",
 		testAccessingTestSuiteName));
     return 0;
 }

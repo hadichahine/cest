@@ -53,14 +53,14 @@ void testResetIterator(){
 
 int main(){
 	return !(
-    runPrimitiveTest("testThatProcessLinkedListHasItem3WhenAdded",
+    runPrimitiveTest("Test that linked list has item 3 when added.",
 		testThatProcessLinkedListHasItem3WhenAdded) &&
-	runPrimitiveTest("testThatProcessLinkedListHasItem3And4WhenAdded",
+	runPrimitiveTest("Test that linked list has item 3 and 4 when added.",
 		testThatProcessLinkedListHasItem3And4WhenAdded) &&
-	runPrimitiveTest("testThatProcessLinkedListHasItem3And4And5WhenAdded",
+	runPrimitiveTest("Test that linked list has item 3, 4, and 5 when added.",
 		testThatProcessLinkedListHasItem3And4And5WhenAdded) &&
-	runPrimitiveTest("testReachedEnd",
+	runPrimitiveTest("Test reached end.",
 		testReachedEnd) &&
-	runPrimitiveTest("testResetIterator",
+	runPrimitiveTest("Test reset iterator.",
 		testResetIterator));
 }

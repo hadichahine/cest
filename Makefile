@@ -6,9 +6,15 @@ DIST_DIR := $(BUILD_DIR)/dist
 INSTALL_DIR := /usr/
 LIBNAME := libcest
 
-all: $(DIST_DIR)/lib/$(LIBNAME).so $(DIST_DIR)/include/cest
+all: static_dependencies $(DIST_DIR)/lib/$(LIBNAME).so $(DIST_DIR)/include/cest
 
-check: $(patsubst $(TESTS_DIR)/%.c, $(BUILD_DIR)/tests/%, $(wildcard $(TESTS_DIR)/*.c))
+static_dependencies: $(OBJ_DIR)/e4c.o
+
+$(OBJ_DIR)/e4c.o: static_dependencies/exceptions4c/e4c.c static_dependencies/exceptions4c/e4c.h
+	mkdir -p $(OBJ_DIR)
+	$(CC) -std=gnu99 -fPIC -c static_dependencies/exceptions4c/e4c.c -o $(OBJ_DIR)/e4c.o
+
+check: all $(patsubst $(TESTS_DIR)/%.c, $(BUILD_DIR)/tests/%, $(wildcard $(TESTS_DIR)/*.c))
 	LD_LIBRARY_PATH=$(DIST_DIR)/lib run-parts --report $(BUILD_DIR)/tests	
 
 install: all
@@ -41,7 +47,6 @@ release-patch: check
 archive: check
 	git archive --format=tar.gz master -o $(BUILD_DIR)/cest-$(CURRENT_VERSION)-$(NAME).tar.gz
 
-
 $(DIST_DIR)/lib/$(LIBNAME).so: $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(wildcard $(SRC_DIR)/*.c))
 	mkdir -p $(DIST_DIR)/lib
 	$(CC) -s -shared $(OBJ_DIR)/*.o -o $(DIST_DIR)/lib/$(LIBNAME).so
@@ -52,7 +57,7 @@ $(DIST_DIR)/include/cest: headers/*
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c primitive_testing/primitive_testing_enviroment.c $(SRC_DIR)/*.c ./headers/* ./primitive_testing/*
 	mkdir -p $(OBJ_DIR)
-	$(CC) -std=gnu99 -fPIC -c $< -I./headers -o $@
+	$(CC) -std=gnu99 -fPIC -c $< -I./headers -I./static_dependencies/exceptions4c -o $@
 
 $(BUILD_DIR)/tests/%: $(TESTS_DIR)/%.c $(DIST_DIR)/lib/$(LIBNAME).so $(DIST_DIR)/include/cest primitive_testing/*
 	mkdir -p $(BUILD_DIR)/tests

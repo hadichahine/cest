@@ -8,7 +8,9 @@ LIBNAME := libcest
 
 all: static_dependencies $(DIST_DIR)/lib/$(LIBNAME).so $(DIST_DIR)/include/cest
 
-static_dependencies: $(OBJ_DIR)/e4c.o
+static_dependencies: exceptions4c
+
+exceptions4c: $(OBJ_DIR)/e4c.o
 
 $(OBJ_DIR)/e4c.o: static_dependencies/exceptions4c/e4c.c static_dependencies/exceptions4c/e4c.h
 	mkdir -p $(OBJ_DIR)

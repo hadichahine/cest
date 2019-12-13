@@ -1,4 +1,5 @@
 BUILD_DIR := build
+STAT_DEPEND := $(BUILD_DIR)/stat_depends
 SRC_DIR := src
 TESTS_DIR := tests
 OBJ_DIR := $(BUILD_DIR)/obj
@@ -10,7 +11,11 @@ all: static_dependencies $(DIST_DIR)/lib/$(LIBNAME).so $(DIST_DIR)/include/cest
 
 static_dependencies: exceptions4c
 
-exceptions4c: $(OBJ_DIR)/e4c.o
+exceptions4c: $(STAT_DEPEND)/libexceptions4c.a
+
+$(STAT_DEPEND)/libexceptions4c.a: $(OBJ_DIR)/e4c.o
+	mkdir -p $(STAT_DEPEND)
+	ar rcs $(STAT_DEPEND)/libexceptions4c.a $(OBJ_DIR)/e4c.o
 
 $(OBJ_DIR)/e4c.o: static_dependencies/exceptions4c/e4c.c static_dependencies/exceptions4c/e4c.h
 	mkdir -p $(OBJ_DIR)
@@ -51,7 +56,7 @@ archive: check
 
 $(DIST_DIR)/lib/$(LIBNAME).so: $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(wildcard $(SRC_DIR)/*.c))
 	mkdir -p $(DIST_DIR)/lib
-	$(CC) -s -shared $(OBJ_DIR)/*.o -o $(DIST_DIR)/lib/$(LIBNAME).so
+	$(CC) -s -shared $(OBJ_DIR)/*.o -L$(STAT_DEPEND) -lexceptions4c -o $(DIST_DIR)/lib/$(LIBNAME).so
 
 $(DIST_DIR)/include/cest: headers/*
 	mkdir -p $(DIST_DIR)/include/cest

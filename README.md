@@ -6,7 +6,7 @@ A traditional unit testing library for C.
 cest's current features:
 - Single test execution.
 - Test suite creation and execution.
-- Test suite pre and post startup hooks.
+- Before suite startup and after finishing hooks.
 
 ## Dependencies
 - **libc**

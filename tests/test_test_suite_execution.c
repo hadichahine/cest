@@ -59,6 +59,32 @@ void testAccessingTestSuiteName(){
     primitiveAssertTrue(!strcmp("testo",CUTestSuite_name(testSuite)));
 }
 
+int isPreSuiteHookRun = 0;
+
+void preSuiteHook(){
+    isPreSuiteHookRun = 1;
+}
+
+void testThatPreStartHookIsRunOnceBeforeAnyTest(){
+    CUTestSuite *testSuite = CUTestSuite_create("test suite with prestart hook");
+    CUTestSuite_runHookBeforeStartingSuite(testSuite, preSuiteHook);
+    CUTestSuite_execute(testSuite);
+    primitiveAssertTrue(isPreSuiteHookRun);
+}
+
+int isPostSuiteHookRun = 0;
+
+void postSuiteHook(){
+    isPostSuiteHookRun = 1;
+}
+
+void testThatPostStartHookIsRunOnceBeforeAnyTest(){
+    CUTestSuite *testSuite = CUTestSuite_create("test suite with poststart hook");
+    CUTestSuite_runHookAfterFinishingSuite(testSuite, postSuiteHook);
+    CUTestSuite_execute(testSuite);
+    primitiveAssertTrue(isPostSuiteHookRun);
+}
+
 int main(){
 	return !(
     runPrimitiveTest("Test that test suite passes when only a passing test is added to it.",
@@ -72,6 +98,10 @@ int main(){
 	runPrimitiveTest("Test that test suite fails when first a passing test then a failing test then a passing test are added to it.",
 		testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt) &&
 	runPrimitiveTest("Test accessing test suite name.",
-		testAccessingTestSuiteName));
+		testAccessingTestSuiteName) && 
+    runPrimitiveTest("Test that PreStart hook is run once before any test.",
+        testThatPreStartHookIsRunOnceBeforeAnyTest) && 
+    runPrimitiveTest("Test that PostStart hook is run once before any test.",
+        testThatPostStartHookIsRunOnceBeforeAnyTest));
     return 0;
 }

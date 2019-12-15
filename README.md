@@ -6,6 +6,7 @@ A traditional unit testing library for C.
 cest's current features:
 - Single test execution.
 - Test suite creation and execution.
+- Test suite pre and post startup hooks.
 
 ## Dependencies
 - **libc**
@@ -68,4 +69,18 @@ CUTestSuite_addTest(testSuite,CUTest_create("passing test", passingTest));
 ```C
 CUTestSuite_execute(testSuite);
 CUTestSuite_didPass(testSuite); //returns 1 if test passed; 0 otherwise.
+```
+
+## Add Before Startup and After Finishing Hooks
+```C
+void beforeStartHook() {
+  // Setup suite
+}
+
+void afterFinishtHook() {
+  // Teardown suite
+}
+
+CUTestSuite_runHookBeforeStartingSuite(testSuite, beforeStartHook);
+CUTestSuite_runHookAfterFinishingSuite(testSuite, afterFinishHook);
 ```

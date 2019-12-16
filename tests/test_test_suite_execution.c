@@ -59,10 +59,10 @@ void testAccessingTestSuiteName(){
     primitiveAssertTrue(!strcmp("testo",CUTestSuite_name(testSuite)));
 }
 
-int isPreSuiteHookRun = 0;
+int isPreSuiteHookRun = FALSE;
 
 void preSuiteHook(){
-    isPreSuiteHookRun = 1;
+    isPreSuiteHookRun = TRUE;
 }
 
 void testThatPreStartHookIsRunOnceBeforeAnyTest(){
@@ -72,10 +72,10 @@ void testThatPreStartHookIsRunOnceBeforeAnyTest(){
     primitiveAssertTrue(isPreSuiteHookRun);
 }
 
-int isPostSuiteHookRun = 0;
+int isPostSuiteHookRun = FALSE;
 
 void postSuiteHook(){
-    isPostSuiteHookRun = 1;
+    isPostSuiteHookRun = TRUE;
 }
 
 void testThatPostStartHookIsRunOnceBeforeAnyTest(){

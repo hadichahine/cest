@@ -1,5 +1,6 @@
 #include "cutest.h"
 #include "linkedlist.h"
+#include "e4c.h"
 #include <stdlib.h>
 
 typedef struct {
@@ -7,6 +8,7 @@ typedef struct {
     LinkedList *testsList;
     void (*beforeStartFunction)();
     void (*afterFinishFunction)();
+    int hook_crashed;
 } CUTestSuite;
 
 void emptyFunction(){}
@@ -17,6 +19,9 @@ CUTestSuite *CUTestSuite_create(char *name){
     testSuite->testsList = createLinkedList();
     testSuite->beforeStartFunction = emptyFunction;
     testSuite->afterFinishFunction = emptyFunction;
+    testSuite->hook_crashed = 0;
+	e4c_context_begin(E4C_TRUE);
+	e4c_context_end();
     return testSuite;
 }
 
@@ -37,7 +42,15 @@ void CUTestSuite_runHookAfterFinishingSuite(CUTestSuite *testSuite, void (*hook)
 }
 
 void CUTestSuite_execute(CUTestSuite *testSuite){
-    testSuite->beforeStartFunction();
+    e4c_using_context(E4C_TRUE){
+		try{
+			testSuite->beforeStartFunction();
+		}catch(BadPointerException){
+			testSuite->hook_crashed = 1;
+		}catch(ArithmeticException){
+            testSuite->hook_crashed = 1;
+        }
+	}
     while(!reachedEnd(testSuite->testsList))
         CUTest_execute(next(testSuite->testsList));
     reset(testSuite->testsList);
@@ -49,5 +62,5 @@ int CUTestSuite_didPass(CUTestSuite *testSuite){
     while(!reachedEnd(testSuite->testsList))
         didPass = CUTest_didTestPass(next(testSuite->testsList)) && didPass;
     reset(testSuite->testsList);
-    return didPass;
+    return !testSuite->hook_crashed && didPass;
 }

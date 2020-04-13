@@ -9,7 +9,12 @@ cest's current features:
 - Before suite startup and after finishing hooks.
 
 ## Dependencies
+- **make**
 - **libc**
+
+## Developer Extra Dependencies
+- **gdb**
+- **valgrind**
 
 ## Installation
 **cest** works for now only on **GNU/Linux** based operating systems.

@@ -21,6 +21,11 @@ $(OBJ_DIR)/e4c.o: static_dependencies/exceptions4c/e4c.c static_dependencies/exc
 	mkdir -p $(OBJ_DIR)
 	$(CC) -std=gnu99 -fPIC -c static_dependencies/exceptions4c/e4c.c -o $(OBJ_DIR)/e4c.o
 
+TEST := test
+
+test-debug: all $(BUILD_DIR)/tests/$(TEST)
+	LD_LIBRARY_PATH=$(DIST_DIR)/lib gdb $(BUILD_DIR)/tests/$(TEST)
+
 check: all $(patsubst $(TESTS_DIR)/%.c, $(BUILD_DIR)/tests/%, $(wildcard $(TESTS_DIR)/*.c))
 	LD_LIBRARY_PATH=$(DIST_DIR)/lib run-parts --report $(BUILD_DIR)/tests	
 
@@ -64,9 +69,9 @@ $(DIST_DIR)/include/cest: headers/*
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c primitive_testing/primitive_testing_enviroment.c $(SRC_DIR)/*.c ./headers/* ./primitive_testing/*
 	mkdir -p $(OBJ_DIR)
-	$(CC) -std=gnu99 -fPIC -c $< -I./headers -I./static_dependencies/exceptions4c -o $@
+	$(CC) -ggdb -std=gnu99 -fPIC -c $< -I./headers -I./static_dependencies/exceptions4c -o $@
 
 $(BUILD_DIR)/tests/%: $(TESTS_DIR)/%.c $(DIST_DIR)/lib/$(LIBNAME).so $(DIST_DIR)/include/cest primitive_testing/*
 	mkdir -p $(BUILD_DIR)/tests
-	$(CC) -std=gnu99 $< primitive_testing/primitive_testing_enviroment.c -lcest -L$(DIST_DIR)/lib -I$(DIST_DIR)/include/cest -I./primitive_testing -o $@
+	$(CC) -ggdb -std=gnu99 $< primitive_testing/primitive_testing_enviroment.c -lcest -L$(DIST_DIR)/lib -I$(DIST_DIR)/include/cest -I./primitive_testing -I./static_dependencies -o $@
 

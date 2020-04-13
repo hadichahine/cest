@@ -20,8 +20,6 @@ CUTestSuite *CUTestSuite_create(char *name){
     testSuite->beforeStartFunction = emptyFunction;
     testSuite->afterFinishFunction = emptyFunction;
     testSuite->hook_crashed = 0;
-	e4c_context_begin(E4C_TRUE);
-	e4c_context_end();
     return testSuite;
 }
 

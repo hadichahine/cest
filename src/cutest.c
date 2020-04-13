@@ -16,8 +16,6 @@ CUTest *CUTest_create(char *name,void (*testFunction)(Assert *assert)){
 	test->name = name;
 	test->testFunction = testFunction;
 	test->assert = Assert_create();
-	e4c_context_begin(E4C_TRUE);
-	e4c_context_end();
 	return test;
 }
 

@@ -12,7 +12,9 @@ typedef struct {
 }LinkedList;
 
 LinkedList* createLinkedList(){
-	return (LinkedList*)malloc(sizeof(LinkedList));
+	LinkedList *linkedList = (LinkedList*)malloc(sizeof(LinkedList));
+	bzero(linkedList, sizeof(LinkedList));
+	return linkedList;
 }
 
 LinkedListNode* createLinkedListNode(){

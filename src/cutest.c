@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <setjmp.h>
 #include "e4c.h"
+#include "mem_alloc.h"
 #include "cutest_assert.h"
 
 typedef struct CUTest {
@@ -12,7 +13,7 @@ typedef struct CUTest {
 }CUTest;
 
 CUTest *CUTest_create(char *name,void (*testFunction)(Assert *assert)){
-	CUTest *test = (CUTest*)malloc(sizeof(CUTest));
+	CUTest *test = (CUTest*)mem_alloc(sizeof(CUTest));
 	test->name = name;
 	test->testFunction = testFunction;
 	test->assert = Assert_create();

@@ -1,6 +1,7 @@
 #include "cutest.h"
 #include "linkedlist.h"
 #include "e4c.h"
+#include "mem_alloc.h"
 #include <stdlib.h>
 
 typedef struct {
@@ -14,7 +15,7 @@ typedef struct {
 void emptyFunction(){}
 
 CUTestSuite *CUTestSuite_create(char *name){
-    CUTestSuite *testSuite = (CUTestSuite*)malloc(sizeof(CUTestSuite));
+    CUTestSuite *testSuite = (CUTestSuite*)mem_alloc(sizeof(CUTestSuite));
     testSuite->name = name;
     testSuite->testsList = createLinkedList();
     testSuite->beforeStartFunction = emptyFunction;

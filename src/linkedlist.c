@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <strings.h>
+#include "mem_alloc.h"
 
 typedef struct node {
 	void *data;
@@ -12,15 +13,11 @@ typedef struct {
 }LinkedList;
 
 LinkedList* createLinkedList(){
-	LinkedList *linkedList = (LinkedList*)malloc(sizeof(LinkedList));
-	bzero(linkedList, sizeof(LinkedList));
-	return linkedList;
+	return (LinkedList*)mem_alloc(sizeof(LinkedList));
 }
 
 LinkedListNode* createLinkedListNode(){
-	LinkedListNode* linkedListNode = (LinkedListNode*) malloc(sizeof(LinkedListNode));
-	bzero(linkedListNode,sizeof(LinkedListNode));
-	return linkedListNode;
+	return (LinkedListNode*)mem_alloc(sizeof(LinkedListNode));
 }
 
 int isEmpty(LinkedList* list){

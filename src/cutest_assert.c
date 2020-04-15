@@ -1,11 +1,12 @@
 #include <stdlib.h>
+#include "mem_alloc.h"
 
 typedef struct Assert {
 	int result;
 }Assert;
 
 Assert *Assert_create(){
-	Assert *assert = (Assert*)malloc(sizeof(Assert));
+	Assert *assert = (Assert*)mem_alloc(sizeof(Assert));
 	assert->result = 1;
 	return assert;
 }

@@ -24,8 +24,10 @@ char *CUTest_testName(CUTest *test){
 	return test->name;
 }
 
+#define use_context(code) if(!e4c_context_is_ready()){e4c_using_context(E4C_TRUE) code }else code
+
 void CUTest_execute(CUTest *test){
-	e4c_using_context(E4C_TRUE){
+	use_context({
 		try{
 			test->testFunction(test->assert);
 		}catch(BadPointerException){
@@ -33,7 +35,7 @@ void CUTest_execute(CUTest *test){
 		}catch(ArithmeticException){
 			Assert_assertTrue(test->assert, 0);
 		}
-	}
+	})
 }
 
 int CUTest_didTestPass(CUTest *test){

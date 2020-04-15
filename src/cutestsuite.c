@@ -39,20 +39,21 @@ void CUTestSuite_runHookBeforeStartingSuite(CUTestSuite *testSuite, void (*hook)
 void CUTestSuite_runHookAfterFinishingSuite(CUTestSuite *testSuite, void (*hook)()){
     testSuite->afterFinishFunction = hook;
 }
+#define use_context(code) if(!e4c_context_is_ready()){e4c_using_context(E4C_TRUE) code }else code
 
 void CUTestSuite_execute(CUTestSuite *testSuite){
-    e4c_using_context(E4C_TRUE){
+   use_context({
 		try{
 			testSuite->beforeStartFunction();
+            while(!reachedEnd(testSuite->testsList))
+                CUTest_execute(next(testSuite->testsList));
+            reset(testSuite->testsList);
 		}catch(BadPointerException){
 			testSuite->hook_crashed = 1;
 		}catch(ArithmeticException){
             testSuite->hook_crashed = 1;
         }
-	}
-    while(!reachedEnd(testSuite->testsList))
-        CUTest_execute(next(testSuite->testsList));
-    reset(testSuite->testsList);
+    })
     testSuite->afterFinishFunction();
 }
 

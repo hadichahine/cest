@@ -89,3 +89,11 @@ void afterFinishtHook() {
 CUTestSuite_runHookBeforeStartingSuite(testSuite, beforeStartHook);
 CUTestSuite_runHookAfterFinishingSuite(testSuite, afterFinishHook);
 ```
+
+## Test Debugging
+
+To debug any test from the test suite use the following command:
+```C
+[user@machine ~]$ make test-debug TEST=test_name
+```
+This command launches gdb on the target test.

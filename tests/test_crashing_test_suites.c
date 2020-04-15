@@ -36,9 +36,31 @@ void testThatTestFailsWhenBeforeTestSuiteHookDividesByZero(){
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
 
+void testThatTestFailsWhenAfterTestSuiteHookAccessesANullPointer(){
+    CUTestSuite *testSuite = CUTestSuite_create("Test suite");
+    CUTestSuite_runHookAfterFinishingSuite(testSuite,functionThatAccessesNullPointer);
+	CUTest *test = CUTest_create("True test",passingTestFunction);
+    CUTestSuite_addTest(testSuite,test);
+	CUTestSuite_execute(testSuite);
+	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+}
+
+void testThatTestFailsWhenAfterTestSuiteHookDividesByZero(){
+    CUTestSuite *testSuite = CUTestSuite_create("Test suite");
+    CUTestSuite_runHookAfterFinishingSuite(testSuite,functionThatDividesByZero);
+	CUTest *test = CUTest_create("True test",passingTestFunction);
+    CUTestSuite_addTest(testSuite,test);
+	CUTestSuite_execute(testSuite);
+	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+}
+
 int main(){
     return !(runPrimitiveTest("Test that test fails when before test suite hook accesses a null pointer.",
              testThatTestFailsWhenBeforeTestSuiteHookAccessesANullPointer) &&
              runPrimitiveTest("Test that test fails when before test suite hook divides by zero.",
-             testThatTestFailsWhenBeforeTestSuiteHookDividesByZero));
+             testThatTestFailsWhenBeforeTestSuiteHookDividesByZero) &&
+             runPrimitiveTest("Test that test fails when after test suite hook accesses a null pointer.",
+             testThatTestFailsWhenAfterTestSuiteHookAccessesANullPointer) &&
+             runPrimitiveTest("Test that test fails when after test suite hook divides by zero.",
+             testThatTestFailsWhenAfterTestSuiteHookDividesByZero));
 }

@@ -44,17 +44,17 @@ void CUTestSuite_runHookAfterFinishingSuite(CUTestSuite *testSuite, void (*hook)
 void CUTestSuite_execute(CUTestSuite *testSuite){
    use_context({
 		try{
-			testSuite->beforeStartFunction();
+            testSuite->beforeStartFunction();
             while(!reachedEnd(testSuite->testsList))
                 CUTest_execute(next(testSuite->testsList));
             reset(testSuite->testsList);
+            testSuite->afterFinishFunction();
 		}catch(BadPointerException){
 			testSuite->hook_crashed = 1;
 		}catch(ArithmeticException){
             testSuite->hook_crashed = 1;
         }
     })
-    testSuite->afterFinishFunction();
 }
 
 int CUTestSuite_didPass(CUTestSuite *testSuite){

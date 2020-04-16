@@ -57,6 +57,7 @@ void destructNodes(LinkedListNode *initialNode){
 }
 
 void destructList(LinkedList *list){
-	destructNodes(list->head);
+	if(!isEmpty(list))
+		destructNodes(list->head);
 	free(list);
 }

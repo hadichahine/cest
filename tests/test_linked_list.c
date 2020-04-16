@@ -56,6 +56,12 @@ void testResetIterator(){
 	destructList(linkedList);
 }
 
+void testThatProgramDoesntCrashWhenEmptyLinkedListIsDestroyed(){
+	LinkedList *linkedList = createLinkedList();
+	destructList(linkedList);
+	primitiveAssertTrue(1);
+}
+
 int main(){
 	return !(
     runPrimitiveTest("Test that linked list has item 3 when added.",
@@ -67,5 +73,7 @@ int main(){
 	runPrimitiveTest("Test reached end.",
 		testReachedEnd) &&
 	runPrimitiveTest("Test reset iterator.",
-		testResetIterator));
+		testResetIterator) &&
+	runPrimitiveTest("Test that program doesnt crash when empty linked list is destroyed.",
+		testThatProgramDoesntCrashWhenEmptyLinkedListIsDestroyed));
 }

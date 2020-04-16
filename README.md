@@ -97,7 +97,7 @@ CUTestSuite_destroy(testSuite);
 ```
 similarly for any destroying a lone test:
 ```C
-CUTest_destroy(testSuite);
+CUTest_destroy(test);
 ```
 Test Suites (or single tests) are better destroyed if execution of the test suite (or test) has finished and it's not used again.
 

@@ -38,3 +38,8 @@ void CUTest_execute(CUTest *test){
 int CUTest_didTestPass(CUTest *test){
 	return Assert_result(test->assert);
 }
+
+void CUTest_destroy(CUTest *test){
+	free(test->assert);
+	free(test);
+}

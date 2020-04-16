@@ -67,7 +67,7 @@ CUTest *passingTest = ...;
 - Create test suite.
 ```C
 CUTestSuite *testSuite = CUTestSuite_create("Passing Test Suite");
-CUTestSuite_addTest(testSuite,CUTest_create("passing test", passingTest));
+CUTestSuite_addTest(testSuite, "passing test", passingTest);
 ```
 
 - Execute test suite.

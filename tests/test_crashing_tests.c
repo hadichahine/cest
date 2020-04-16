@@ -12,6 +12,7 @@ void testThatTestFailsWhenTestFunctionAccessesANullPointer(){
 	CUTest *test = CUTest_create("Null test pointer",testThatAccessesANullPointer);
 	CUTest_execute(test);
 	primitiveAssertTrue(!CUTest_didTestPass(test));
+    CUTest_destroy(test);
 }
 
 void testThatTestsFailsWhenDividingByZero(Assert *assert){
@@ -23,6 +24,7 @@ void testThatTestFailsWhenTestFunctionDividesByZero(){
 	CUTest *test = CUTest_create("Divide by zero",testThatTestsFailsWhenDividingByZero);
 	CUTest_execute(test);
 	primitiveAssertTrue(!CUTest_didTestPass(test));
+    CUTest_destroy(test);
 }
 
 int main(){

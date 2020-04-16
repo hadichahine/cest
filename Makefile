@@ -26,6 +26,9 @@ TEST := test
 test-debug: all $(BUILD_DIR)/tests/$(TEST)
 	LD_LIBRARY_PATH=$(DIST_DIR)/lib gdb $(BUILD_DIR)/tests/$(TEST)
 
+test-check-memory-leak: all $(BUILD_DIR)/tests/$(TEST)
+	LD_LIBRARY_PATH=$(DIST_DIR)/lib valgrind --leak-check=full $(BUILD_DIR)/tests/$(TEST)
+
 check: all $(patsubst $(TESTS_DIR)/%.c, $(BUILD_DIR)/tests/%, $(wildcard $(TESTS_DIR)/*.c))
 	LD_LIBRARY_PATH=$(DIST_DIR)/lib run-parts --report $(BUILD_DIR)/tests	
 

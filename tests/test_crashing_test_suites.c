@@ -19,6 +19,7 @@ void testThatTestFailsWhenBeforeTestSuiteHookAccessesANullPointer(){
     CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void functionThatDividesByZero(Assert *assert){
@@ -32,6 +33,7 @@ void testThatTestFailsWhenBeforeTestSuiteHookDividesByZero(){
     CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void testThatTestFailsWhenAfterTestSuiteHookAccessesANullPointer(){
@@ -40,6 +42,7 @@ void testThatTestFailsWhenAfterTestSuiteHookAccessesANullPointer(){
     CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void testThatTestFailsWhenAfterTestSuiteHookDividesByZero(){
@@ -48,6 +51,7 @@ void testThatTestFailsWhenAfterTestSuiteHookDividesByZero(){
     CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 int main(){

@@ -7,6 +7,7 @@ void testThatProcessLinkedListHasItem3WhenAdded(){
 	int x = 3;
 	addItemToLinkedList(linkedList,&x);
 	primitiveAssertTrue(x == *((int*) next(linkedList)));
+	destructList(linkedList);
 }
 
 void testThatProcessLinkedListHasItem3And4WhenAdded(){
@@ -17,6 +18,7 @@ void testThatProcessLinkedListHasItem3And4WhenAdded(){
 	addItemToLinkedList(linkedList,&y);
 	primitiveAssertTrue(x == *((int*) next(linkedList)));	
 	primitiveAssertTrue(y == *((int*) next(linkedList)));
+	destructList(linkedList);
 }
 
 void testThatProcessLinkedListHasItem3And4And5WhenAdded(){
@@ -30,6 +32,7 @@ void testThatProcessLinkedListHasItem3And4And5WhenAdded(){
 	primitiveAssertTrue(x == *((int*) next(linkedList)));	
 	primitiveAssertTrue(y == *((int*) next(linkedList)));		
 	primitiveAssertTrue(z == *((int*) next(linkedList)));
+	destructList(linkedList);
 }
 
 void testReachedEnd(){
@@ -38,6 +41,7 @@ void testReachedEnd(){
 	addItemToLinkedList(linkedList,&x);
 	primitiveAssertTrue(x == *((int*) next(linkedList)));
 	primitiveAssertTrue(reachedEnd(linkedList));
+	destructList(linkedList);
 }
 
 void testResetIterator(){
@@ -49,6 +53,7 @@ void testResetIterator(){
 	primitiveAssertTrue(x == *((int*) next(linkedList)));
 	reset(linkedList);
 	primitiveAssertTrue(x == *((int*) next(linkedList)));
+	destructList(linkedList);
 }
 
 int main(){

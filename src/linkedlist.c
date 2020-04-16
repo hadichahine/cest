@@ -49,3 +49,14 @@ int reachedEnd(LinkedList *list){
 void reset(LinkedList *list){
 	list->currentReadCursor = list->head;
 }
+
+void destructNodes(LinkedListNode *initialNode){
+	if(initialNode->next != NULL)
+		destructNodes(initialNode->next);
+	free(initialNode);
+}
+
+void destructList(LinkedList *list){
+	destructNodes(list->head);
+	free(list);
+}

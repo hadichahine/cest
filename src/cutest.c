@@ -1,7 +1,4 @@
 #include <stdlib.h>
-#include <signal.h>
-#include <stdio.h>
-#include <setjmp.h>
 #include "e4c.h"
 #include "mem_alloc.h"
 #include "cutest_assert.h"

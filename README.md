@@ -90,6 +90,17 @@ CUTestSuite_runHookBeforeStartingSuite(testSuite, beforeStartHook);
 CUTestSuite_runHookAfterFinishingSuite(testSuite, afterFinishHook);
 ```
 
+## Test & Test Suite Destruction
+To Destroy test suite:
+```C
+CUTestSuite_destroy(testSuite);
+```
+similarly for any destroying a lone test:
+```C
+CUTest_destroy(test);
+```
+Test Suites (or single tests) are better destroyed if execution of the test suite (or test) has finished and it's not used again.
+
 ## Test Debugging
 
 To debug any test from the test suite use the following command:

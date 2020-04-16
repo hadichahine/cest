@@ -28,7 +28,8 @@ char *CUTestSuite_name(CUTestSuite *testSuite){
     return testSuite->name;
 }
 
-void CUTestSuite_addTest(CUTestSuite *testSuite,CUTest *test){
+void CUTestSuite_addTest(CUTestSuite *testSuite, char *name, void (*testFunction)(Assert *assert)){
+    CUTest *test = CUTest_create(name, testFunction);
     addItemToLinkedList(testSuite->testsList,test);
 }
 

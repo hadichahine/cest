@@ -16,8 +16,7 @@ void functionThatAccessesNullPointer(Assert *assert){
 void testThatTestFailsWhenBeforeTestSuiteHookAccessesANullPointer(){
     CUTestSuite *testSuite = CUTestSuite_create("Test suite");
     CUTestSuite_runHookBeforeStartingSuite(testSuite,functionThatAccessesNullPointer);
-	CUTest *test = CUTest_create("True test",passingTestFunction);
-    CUTestSuite_addTest(testSuite,test);
+    CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
@@ -30,8 +29,7 @@ void functionThatDividesByZero(Assert *assert){
 void testThatTestFailsWhenBeforeTestSuiteHookDividesByZero(){
     CUTestSuite *testSuite = CUTestSuite_create("Test suite");
     CUTestSuite_runHookBeforeStartingSuite(testSuite,functionThatDividesByZero);
-	CUTest *test = CUTest_create("True test",passingTestFunction);
-    CUTestSuite_addTest(testSuite,test);
+    CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
@@ -39,8 +37,7 @@ void testThatTestFailsWhenBeforeTestSuiteHookDividesByZero(){
 void testThatTestFailsWhenAfterTestSuiteHookAccessesANullPointer(){
     CUTestSuite *testSuite = CUTestSuite_create("Test suite");
     CUTestSuite_runHookAfterFinishingSuite(testSuite,functionThatAccessesNullPointer);
-	CUTest *test = CUTest_create("True test",passingTestFunction);
-    CUTestSuite_addTest(testSuite,test);
+    CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
@@ -48,8 +45,7 @@ void testThatTestFailsWhenAfterTestSuiteHookAccessesANullPointer(){
 void testThatTestFailsWhenAfterTestSuiteHookDividesByZero(){
     CUTestSuite *testSuite = CUTestSuite_create("Test suite");
     CUTestSuite_runHookAfterFinishingSuite(testSuite,functionThatDividesByZero);
-	CUTest *test = CUTest_create("True test",passingTestFunction);
-    CUTestSuite_addTest(testSuite,test);
+    CUTestSuite_addTest(testSuite, "True test",passingTestFunction);
 	CUTestSuite_execute(testSuite);
 	primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }

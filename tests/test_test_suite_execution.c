@@ -17,39 +17,39 @@ void failingTest(Assert *assert){
 
 void testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt(){
     CUTestSuite *testSuite = CUTestSuite_create("Passing Test Suite");
-    CUTestSuite_addTest(testSuite,CUTest_create("passing test",passingTest));
+    CUTestSuite_addTest(testSuite, "passing test", passingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(CUTestSuite_didPass(testSuite));
 }
 
 void testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt(){
     CUTestSuite *testSuite = CUTestSuite_create("Failing Test Suite");
-    CUTestSuite_addTest(testSuite,CUTest_create("failing",failingTest));
+    CUTestSuite_addTest(testSuite, "failing", failingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
 
 void testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt(){
     CUTestSuite *testSuite = CUTestSuite_create("Failing Test Suite");
-    CUTestSuite_addTest(testSuite,CUTest_create("failing",failingTest));
-    CUTestSuite_addTest(testSuite,CUTest_create("passing test",passingTest));
+    CUTestSuite_addTest(testSuite, "failing", failingTest);
+    CUTestSuite_addTest(testSuite, "passing test", passingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
 
 void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt(){
     CUTestSuite *testSuite = CUTestSuite_create("Failing Test Suite");
-    CUTestSuite_addTest(testSuite,CUTest_create("passing test",passingTest));
-    CUTestSuite_addTest(testSuite,CUTest_create("failing test",failingTest));
+    CUTestSuite_addTest(testSuite, "passing test", passingTest);
+    CUTestSuite_addTest(testSuite, "failing test", failingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }
 
 void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt(){
     CUTestSuite *testSuite = CUTestSuite_create("Failing Test Suite");
-    CUTestSuite_addTest(testSuite,CUTest_create("passing test",passingTest));
-    CUTestSuite_addTest(testSuite,CUTest_create("failing test",failingTest));
-    CUTestSuite_addTest(testSuite,CUTest_create("passing test",passingTest));
+    CUTestSuite_addTest(testSuite, "passing test", passingTest);
+    CUTestSuite_addTest(testSuite, "failing test", failingTest);
+    CUTestSuite_addTest(testSuite, "passing test", passingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
 }

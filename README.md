@@ -54,7 +54,7 @@ CUTest *test = CUTest_create("Test name is here", test_function);
 CUTest_execute(test);
 CUTest_didTestPass(test); //returns 1 if test passed; 0 otherwise.
 ```
-## Create and execute test suite
+## Create and execute a test suite
 - Include **cest**'s test suite header.
 ```C
 #include <cest/cutestsuite.h>

@@ -1,8 +1,8 @@
+#include <stdlib.h>
 #include "cutest.h"
 #include "linkedlist.h"
 #include "e4c.h"
 #include "mem_alloc.h"
-#include <stdlib.h>
 
 typedef struct {
     char *name;

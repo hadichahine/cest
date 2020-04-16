@@ -59,10 +59,6 @@ CUTest_didTestPass(test); //returns 1 if test passed; 0 otherwise.
 ```C
 #include <cest/cutestsuite.h>
 ```
-- Create single test (as described previously).
-```C
-CUTest *passingTest = ...;
-```
 
 - Create test suite.
 ```C

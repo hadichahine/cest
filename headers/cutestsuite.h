@@ -10,6 +10,7 @@ void CUTestSuite_runHookBeforeStartingSuite(CUTestSuite *testSuite, void (*hook)
 void CUTestSuite_runHookAfterFinishingSuite(CUTestSuite *testSuite, void (*hook)());
 void CUTestSuite_execute(CUTestSuite *testSuite);
 int CUTestSuite_didPass(CUTestSuite *testSuite);
+void CUTestSuite_destroy(CUTestSuite *testSuite);
 
 #define CUTESTSUITE_Header
 #endif

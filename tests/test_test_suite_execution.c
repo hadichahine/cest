@@ -20,6 +20,7 @@ void testThatTestSuitePassesWhenAPassingTestIsTheOnlyTestAddedToIt(){
     CUTestSuite_addTest(testSuite, "passing test", passingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt(){
@@ -27,6 +28,7 @@ void testThatTestSuiteFailsWhenAFailingTestIsTheOnlyTestAddedToIt(){
     CUTestSuite_addTest(testSuite, "failing", failingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt(){
@@ -35,6 +37,7 @@ void testThatTestSuiteFailsWhenFirstAFailingTestThenASucceedingTestAreAddedToIt(
     CUTestSuite_addTest(testSuite, "passing test", passingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt(){
@@ -43,6 +46,7 @@ void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestAreAddedToIt(
     CUTestSuite_addTest(testSuite, "failing test", failingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedingTestAreAddedToIt(){
@@ -52,11 +56,13 @@ void testThatTestSuiteFailsWhenFirstASucceedingTestThenAFailingTestThenASucceedi
     CUTestSuite_addTest(testSuite, "passing test", passingTest);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(!CUTestSuite_didPass(testSuite));
+    CUTestSuite_destroy(testSuite);
 }
 
 void testAccessingTestSuiteName(){
     CUTestSuite *testSuite = CUTestSuite_create("testo");
     primitiveAssertTrue(!strcmp("testo",CUTestSuite_name(testSuite)));
+    CUTestSuite_destroy(testSuite);
 }
 
 int isPreSuiteHookRun = FALSE;
@@ -70,6 +76,7 @@ void testThatPreStartHookIsRunOnceBeforeAnyTest(){
     CUTestSuite_runHookBeforeStartingSuite(testSuite, preSuiteHook);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(isPreSuiteHookRun);
+    CUTestSuite_destroy(testSuite);
 }
 
 int isPostSuiteHookRun = FALSE;
@@ -83,6 +90,7 @@ void testThatPostStartHookIsRunOnceBeforeAnyTest(){
     CUTestSuite_runHookAfterFinishingSuite(testSuite, postSuiteHook);
     CUTestSuite_execute(testSuite);
     primitiveAssertTrue(isPostSuiteHookRun);
+    CUTestSuite_destroy(testSuite);
 }
 
 int main(){

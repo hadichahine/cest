@@ -65,3 +65,11 @@ int CUTestSuite_didPass(CUTestSuite *testSuite){
     reset(testSuite->testsList);
     return !testSuite->hook_crashed && didPass;
 }
+
+void CUTestSuite_destroy(CUTestSuite *testSuite){
+    while(!reachedEnd(testSuite->testsList))
+        CUTest_destroy(next(testSuite->testsList));
+    reset(testSuite->testsList);
+    destructList(testSuite->testsList);
+    free(testSuite);
+}

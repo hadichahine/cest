@@ -46,8 +46,8 @@ add=$(shell echo $$(( $(1) + $(2) )))
 major=$(shell printf $(CURRENT_VERSION) | cut - --delimiter="." -f1)
 minor=$(shell printf $(CURRENT_VERSION) | cut - --delimiter="." -f2)
 patch=$(shell printf $(CURRENT_VERSION) | cut - --delimiter="." -f3)
-nextmajor=$(call add, $(call major), $(INCREMENT)).$(call minor).$(call patch)
-nextminor=$(call major).$(call add, $(call minor), $(INCREMENT)).$(call patch)
+nextmajor=$(call add, $(call major), $(INCREMENT)).0.0
+nextminor=$(call major).$(call add, $(call minor), $(INCREMENT)).0
 nextpatch=$(call major).$(call minor).$(call add, $(call patch), $(INCREMENT))
 
 release-major: check

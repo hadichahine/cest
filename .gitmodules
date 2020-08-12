@@ -1,0 +1,3 @@
+[submodule "deployment/archlinux/cest-git"]
+	path = deployment/archlinux/cest-git
+	url = ssh://aur@aur.archlinux.org/cest-git.git

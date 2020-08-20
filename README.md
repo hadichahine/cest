@@ -8,6 +8,9 @@ cest's current features:
 - Test suite creation and execution.
 - Before suite startup and after finishing hooks.
 
+## Packages
+- [cest-git](https://aur.archlinux.org/packages/cest-git/) on AUR
+
 ## Dependencies
 - **make**
 - **libc**

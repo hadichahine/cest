@@ -35,8 +35,31 @@ All executed make tasks should complete successfully.
 ```
 user@machine$ gcc test.c -lcest -o CestSampleTest
 ```
+## Using Test Suite Constructor
 
-## Create and execute a single test
+The test suite conctructor is in its early stages with extremely small and basic features. Using the API is the way to go if you're going to use test hooks.
+```
+#include <cest/create_test_suite.h>
+
+START_TEST_SUITE("Test that test is test")
+
+int pow(int x){
+	return x*x;
+}
+
+TEST("Test that pow(0) is zero",(Assert *assert){
+    Assert_assertTrue(assert,pow(0) == 0);
+});
+
+TEST("Test that pow(2) == 4",(Assert *assert){
+    Assert_assertTrue(assert,pow(2) == 4);
+});
+
+END_TEST_SUITE
+```
+
+## Using the Inner API
+### Create and execute a single test
 - Include **cest**'s test header.
 ```C
 #include <cest/cutest.h>
@@ -57,7 +80,7 @@ CUTest *test = CUTest_create("Test name is here", test_function);
 CUTest_execute(test);
 CUTest_didTestPass(test); //returns 1 if test passed; 0 otherwise.
 ```
-## Create and execute a test suite
+### Create and execute a test suite
 - Include **cest**'s test suite header.
 ```C
 #include <cest/cutestsuite.h>
@@ -75,7 +98,7 @@ CUTestSuite_execute(testSuite);
 CUTestSuite_didPass(testSuite); //returns 1 if test passed; 0 otherwise.
 ```
 
-## Add Before Startup and After Finishing Hooks
+### Add Before Startup and After Finishing Hooks
 ```C
 void beforeStartHook() {
   // Setup suite
@@ -89,7 +112,7 @@ CUTestSuite_runHookBeforeStartingSuite(testSuite, beforeStartHook);
 CUTestSuite_runHookAfterFinishingSuite(testSuite, afterFinishHook);
 ```
 
-## Test & Test Suite Destruction
+### Test & Test Suite Destruction
 To Destroy test suite:
 ```C
 CUTestSuite_destroy(testSuite);
